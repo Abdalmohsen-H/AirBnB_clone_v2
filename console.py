@@ -211,6 +211,7 @@ class HBNBCommand(cmd.Cmd):
                 req_inst = f"{myargs[0]}.{new_instance.id}"
                 # create attribute
                 setattr(storage.all()[req_inst], attr_name, attr_val)
+                print(new_instance.id)
                 # storage.reload()
                 storage.save()
 
