@@ -1,1 +1,1 @@
-{}
+{"City.9862edba-cefd-498e-9001-76774313a3b9": {"id": "9862edba-cefd-498e-9001-76774313a3b9", "created_at": "2023-09-20T17:11:00.181203", "updated_at": "2023-09-20T17:11:00.181209", "__class__": "City"}, "State.8db13ffd-7a5f-43ee-bc8c-699a42d963d4": {"id": "8db13ffd-7a5f-43ee-bc8c-699a42d963d4", "created_at": "2023-09-20T17:11:37.317290", "updated_at": "2023-09-20T17:11:37.317295", "name": "California", "__class__": "State"}}
