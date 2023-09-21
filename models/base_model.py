@@ -34,22 +34,20 @@ class BaseModel:
         """instance intialization function to
         create a new model"""
 
-        if not kwargs:
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-
-        else:
-            for key, val in kwargs.items():
-                if key == '__class__':
-                    continue
-                setattr(self, key, val)
-                if type(self.created_at) is str:
-                    self.created_at = datetime.strptime(self.created_at,
-                                                        time_frmt)
-                if type(self.updated_at) is str:
-                    self.updated_at = datetime.strptime(self.updated_at,
-                                                        time_frmt)
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        
+        for key, val in kwargs.items():
+            if key == '__class__':
+                continue
+            setattr(self, key, val)
+            if type(self.created_at) is str:
+                self.created_at = datetime.strptime(self.created_at,
+                        time_frmt)
+            if type(self.updated_at) is str:
+                self.updated_at = datetime.strptime(self.updated_at,
+                        time_frmt)
 
     def __str__(self):
         """Returns a string representation of the instance"""
@@ -71,7 +69,7 @@ class BaseModel:
         my_dict['updated_at'] = self.updated_at.isoformat()
 
         # remove _sa_instance_state key only if exist
-        new_dict.pop('_sa_instance_state', None)
+        my_dict.pop('_sa_instance_state', None)
 
         return (my_dict)
 
