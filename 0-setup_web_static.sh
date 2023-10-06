@@ -20,7 +20,7 @@ sudo mkdir -p /data/web_static/releases/test/
 
 # create dummy index file for testing, then add dummy content to it
 sudo touch /data/web_static/releases/test/index.html
-sudo echo "<html><head></head><body>Do hard things</body></html>" > /data/web_static/releases/test/index.html
+sudo echo "<html><head></head><body>It's woking!! A. Hesham</body></html>" > /data/web_static/releases/test/index.html
 
 # -s symplic link , -f force create this new even if name already exist onpath then overwrite
 sudo ln -s -f /data/web_static/releases/test/ /data/web_static/current
