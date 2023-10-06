@@ -28,12 +28,12 @@ exec {'install_nginx':
   path => '/usr/bin/:/usr/local/bin/:/bin/'
 }
 
-exec {'replace_config_with_sed':
+-> exec {'replace_config_with_sed':
   command  => 'sh -c \'sed -i "/server_name/a location /hbnb_static { alias /data/web_static/current/;}" /etc/nginx/sites-enabled/default\' ',
   provider => shell,
 }
 
-exec {'apply_new_config':
+-> exec {'apply_new_config':
   command  => 'sudo service nginx restart',
   provider => shell,
 }
