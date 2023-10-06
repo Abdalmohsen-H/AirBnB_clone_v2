@@ -19,7 +19,13 @@ sudo mkdir -p /data/web_static/shared/
 sudo mkdir -p /data/web_static/releases/test/
 
 sudo touch /data/web_static/releases/test/index.html
-echo "<html><head></head><body>It's working!! A. Hesham</body></html>" | sudo tee /data/web_static/releases/test/index.html
+echo "<html>
+    <head>
+    </head>
+    <body>
+        It's working!! A. Hesham
+    </body>
+</html>" | sudo tee /data/web_static/releases/test/index.html
 
 rm -rf /data/web_static/current
 # -s symplic link , -f force create this new even if name already exist onpath then overwrite
@@ -31,9 +37,13 @@ sudo chown -R ubuntu:ubuntu /data/
 
 # using sed command with (a), find line contain pattern "server_name" then append (a) after it the location with alias
 # on nginx default config file, -i means change in place , / befor a, is just a delimeter have no meaning and could be replaced
+# 0,/^\tserver_name/a -> 0 means first match , a for append
 if ! grep -q 'location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-enabled/default; then
-    sudo sed -i '/server_name/a location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-enabled/default
+    awk '/server_name/ && !flag {print; print "\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n}"; flag=1; next} 1' /etc/nginx/sites-enabled/default | sudo tee /etc/nginx/sites-enabled/default >/dev/null
 fi
 
 # restart nginx to apply new changes in config
 sudo service nginx restart
+
+# Exit mode
+exit
