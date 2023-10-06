@@ -35,9 +35,7 @@ sudo ln -s -f /data/web_static/releases/test/ /data/web_static/current
 # to be owned by ubuntu/ubuntu user/group
 sudo chown -R ubuntu:ubuntu /data/
 
-# using sed command with (a), find line contain pattern "server_name" then append (a) after it the location with alias
-# on nginx default config file, -i means change in place , / befor a, is just a delimeter have no meaning and could be replaced
-# 0,/^\tserver_name/a -> 0 means first match , a for append
+# /server_name/ find first match for this pattern then print it to file and print (append) my addition to config 
 if ! grep -q 'location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-enabled/default; then
     awk '/server_name/ && !flag {print; print "\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n}"; flag=1; next} 1' /etc/nginx/sites-enabled/default | sudo tee /etc/nginx/sites-enabled/default >/dev/null
 fi
