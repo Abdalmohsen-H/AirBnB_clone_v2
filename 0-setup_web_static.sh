@@ -21,6 +21,7 @@ sudo mkdir -p /data/web_static/releases/test/
 sudo touch /data/web_static/releases/test/index.html
 echo "<html><head></head><body>It's working!! A. Hesham</body></html>" | sudo tee /data/web_static/releases/test/index.html
 
+rm -rf /data/web_static/current
 # -s symplic link , -f force create this new even if name already exist onpath then overwrite
 sudo ln -s -f /data/web_static/releases/test/ /data/web_static/current
 
