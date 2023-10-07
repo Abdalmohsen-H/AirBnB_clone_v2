@@ -28,9 +28,14 @@ exec {'install_nginx':
   path => '/usr/bin/:/usr/local/bin/:/bin/'
 }
 
--> exec {'replace_config_with_sed':
-  command  => 'sh -c \'sed -i "/server_name/a location /hbnb_static { alias /data/web_static/current/;}" /etc/nginx/sites-enabled/default\' ',
-  provider => shell,
+-> file_line { 'add_path_location_to_nginx_config':
+  ensure => present,
+  path   => '/etc/nginx/sites-available/default',
+  line   => "   server_name _;
+        location /hbnb_static {
+                alias /data/web_static/current/;
+        }",
+  match  => '^\tserver_name _;',
 }
 
 -> exec {'apply_new_config':
