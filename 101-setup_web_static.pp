@@ -24,8 +24,9 @@ exec {'install_nginx':
   target => '/data/web_static/releases/test'
 }
 
--> exec { 'chown -R ubuntu:ubuntu /data/':
-  path => '/usr/bin/:/usr/local/bin/:/bin/'
+-> exec { 'change_permission':
+  command  => 'sudo chown -R ubuntu:ubuntu /data/',
+  provider => shell,
 }
 
 -> file_line { 'add_path_location_to_nginx_config':
