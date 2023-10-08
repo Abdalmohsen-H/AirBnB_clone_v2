@@ -63,10 +63,7 @@ def do_deploy(archive_path):
     try:
         # if archive_path doesn't exist return false
         if not (path.exists(archive_path)):
-                return False
-
-        # else continue task requirements
-        put(archive_path, '/tmp/')
+            return False
 
         # flname_wth_ext : filname including(with) extension
         flname_wth_ext = os.path.basename(archive_path)
@@ -75,19 +72,23 @@ def do_deploy(archive_path):
         flname_no_extn, extn = os.path.splitext(flname_wth_ext)
 
         dirpath = "/data/web_static/releases/"
+        # else continue task requirements
+        put(archive_path, '/tmp/')
 
         # remove old versions of same archive from prev. script runs
         run("rm -rf {}{}/".format(dpath, flname_no_extn))
 
-        #create all folders and sub folders to uncompress file archive
+        # create all folders and sub folders to uncompress file archive
         run("mkdir -p {}{}/".format(dpath, flname_no_extn))
 
         # uncompress archive to desired location
-        run("tar -xzf /tmp/{} -C {}{}/".format(flname_wth_ext, dpath, flname_no_extn))
+        run("tar -xzf /tmp/{} -C {}{}/".format(
+            flname_wth_ext, dpath, flname_no_extn))
 
         # remove archive from tmp folder after being uncompressed above
         run("rm /tmp/{}".format(flname_wth_ext))
+
         return True
 
-    except:
+    except Exception as e:
         return False
