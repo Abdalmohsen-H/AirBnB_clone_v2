@@ -76,14 +76,14 @@ def do_deploy(archive_path):
         flname_no_extn, extn = os.path.splitext(flname_wth_ext)
 
         # remove old versions of same archive from prev. script runs
-        run("rm -rf {}{}/".format(dpath, flname_no_extn))
+        run("rm -rf {}{}/".format(dirpath, flname_no_extn))
 
         # create all folders and sub folders to uncompress file archive
-        run("mkdir -p {}{}/".format(dpath, flname_no_extn))
+        run("mkdir -p {}{}/".format(dirpath, flname_no_extn))
 
         # uncompress archive to desired location
         run("tar -xzf /tmp/{} -C {}{}/".format(
-            flname_wth_ext, dpath, flname_no_extn))
+            flname_wth_ext, dirpath, flname_no_extn))
 
         # remove archive from tmp folder after being uncompressed above
         run("rm /tmp/{}".format(flname_wth_ext))
