@@ -1,11 +1,19 @@
-#!/usr/bin/python3
+The ~/.ssh/authorized_keys file is indeed user-specific on the remote server. Each user on the remote server can have their own authorized_keys file in their home directory, which contains the public keys allowed to authenticate as that user.
+
+When you add an SSH public key to a user's authorized_keys file, it only affects that specific user's ability to authenticate using the corresponding private key from your local machine. It does not affect other users on the remote server.
+
+To clarify:
+
+Each user on the remote server can manage their own ~/.ssh/authorized_keys file to control who can access their account via SSH.
+
+Making changes to one user's authorized_keys file should not affect the SSH access of other users on the server.#!/usr/bin/python3
 """Task0: Fab file for fabric practice in python
 to automate compress files and dirs for
 web static folder"""
 
 # Import Fabric's API module
 from fabric.api import *
-from sys import argv
+from os import path
 from time import strftime
 web_01_IP = '54.165.176.205'
 web_02_IP = '52.204.94.151'
@@ -60,5 +68,34 @@ def do_deploy(archive_path):
     Returns:
         True if all operations are successful, False otherwise.
     """
-    path = do_pack()
-    put(path, "/tmp/")
+    try:
+        # if archive_path doesn't exist return false
+        if not (path.exists(archive_path)):
+                return False
+
+        # else continue task requirements
+        put(archive_path, '/tmp/')
+
+        # flname_wth_ext : filname including(with) extension
+        flname_wth_ext = os.path.basename(archive_path)
+        # flname_no_extn : filname without extension
+        # extn : extension
+        flname_no_extn, extn = os.path.splitext(flname_wth_ext)
+
+        dirpath = "/data/web_static/releases/"
+
+        # remove old versions of same archive from prev. script runs
+        run("rm -rf {}{}/".format(dpath, flname_no_extn))
+
+        #create all folders and sub folders to uncompress file archive
+        run("mkdir -p {}{}/".format(dpath, flname_no_extn))
+
+        # uncompress archive to desired location
+        run("tar -xzf /tmp/{} -C {}{}/".format(flname_wth_ext, dpath, flname_no_extn))
+
+        # remove archive from tmp folder after being uncompressed above
+        run("rm /tmp/{}".format(flname_wth_ext))
+        return True
+
+    except:
+        return False
