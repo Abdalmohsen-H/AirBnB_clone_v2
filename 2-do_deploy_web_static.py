@@ -1,12 +1,4 @@
-The ~/.ssh/authorized_keys file is indeed user-specific on the remote server. Each user on the remote server can have their own authorized_keys file in their home directory, which contains the public keys allowed to authenticate as that user.
-
-When you add an SSH public key to a user's authorized_keys file, it only affects that specific user's ability to authenticate using the corresponding private key from your local machine. It does not affect other users on the remote server.
-
-To clarify:
-
-Each user on the remote server can manage their own ~/.ssh/authorized_keys file to control who can access their account via SSH.
-
-Making changes to one user's authorized_keys file should not affect the SSH access of other users on the server.#!/usr/bin/python3
+#!/usr/bin/python3
 """Task0: Fab file for fabric practice in python
 to automate compress files and dirs for
 web static folder"""
