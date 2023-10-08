@@ -103,5 +103,5 @@ def do_deploy(archive_path):
         return True
 
     except Exception as e:
-        print(e)
+        # print(e)
         return False
