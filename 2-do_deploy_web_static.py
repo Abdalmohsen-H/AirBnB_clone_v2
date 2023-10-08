@@ -62,7 +62,7 @@ def do_deploy(archive_path):
     """
     try:
         # if archive_path doesn't exist return false
-        if not (os.path.exists(archive_path)):
+        if not (path.exists(archive_path)):
             return False
 
         dirpath = "/data/web_static/releases/"
@@ -76,14 +76,17 @@ def do_deploy(archive_path):
         flname_no_extn, extn = os.path.splitext(flname_wth_ext)
 
         # remove old versions of same archive from prev. script runs
-        run("rm -rf {}{}/".format(dirpath, flname_no_extn))
+        run("rm -rf {}{}/".format(dpath, flname_no_extn))
 
         # create all folders and sub folders to uncompress file archive
-        run("mkdir -p {}{}/".format(dirpath, flname_no_extn))
+        run("mkdir -p {}{}/".format(dpath, flname_no_extn))
 
         # uncompress archive to desired location
-        run("tar -xzf /tmp/{} -C {}{}/".format(
-            flname_wth_ext, dirpath, flname_no_extn))
+        # --strip-components=1 option means to uncompress content of webstatic
+        # folder without creating folder called webstatic
+
+        run("tar -xzf /tmp/{} -C {}{}/ --strip-components=1".format(
+            flname_wth_ext, dpath, flname_no_extn))
 
         # remove archive from tmp folder after being uncompressed above
         run("rm /tmp/{}".format(flname_wth_ext))
