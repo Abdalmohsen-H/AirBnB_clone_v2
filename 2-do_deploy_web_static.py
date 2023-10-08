@@ -7,10 +7,10 @@ web static folder"""
 from fabric.api import *
 from os.sys import argv
 from time import strftime
-web-1-IP = '54.165.176.205'
-web-2-IP = '52.204.94.151'
-env.hosts = [web-1-IP, web-2-IP]
-env.hosts = [web-1-IP]
+web_01_IP = '54.165.176.205'
+web_02_IP = '52.204.94.151'
+env.hosts = [web_01_IP, web_02_IP]
+env.hosts = [web_01_IP]
 
 
 def do_pack():
