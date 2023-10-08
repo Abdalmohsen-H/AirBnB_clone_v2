@@ -5,7 +5,7 @@ web static folder"""
 
 # Import Fabric's API module
 from fabric.api import *
-from os.sys import argv
+from sys import argv
 from time import strftime
 web_01_IP = '54.165.176.205'
 web_02_IP = '52.204.94.151'
