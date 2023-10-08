@@ -10,7 +10,6 @@ from time import strftime
 web_01_IP = '54.165.176.205'
 web_02_IP = '52.204.94.151'
 env.hosts = [web_01_IP, web_02_IP]
-env.hosts = [web_01_IP]
 
 
 def do_pack():
@@ -90,6 +89,16 @@ def do_deploy(archive_path):
 
         # remove archive from tmp folder after being uncompressed above
         run("rm /tmp/{}".format(flname_wth_ext))
+
+        # Delete symbolic link /data/web_static/current from remote server
+        run("rm -rf /data/web_static/current")
+
+        # Create a new symbolic link /data/web_static/current on remote web
+        # server, linked to the new version of benn uncompressed
+        run("ln -s {}{}/ /data/web_static/current".format(
+            dirpath, flname_no_extn))
+
+        print("Task 2 : New version deployed!")
 
         return True
 
