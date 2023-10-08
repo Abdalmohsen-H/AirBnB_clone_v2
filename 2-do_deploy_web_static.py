@@ -21,7 +21,7 @@ def do_pack():
         path of .tar Archive if succes, else None
     """
     name_time_frmt = strftime('%Y%m%d%H%M%S')
-    arch_file_name = "versions/web_static_{}.tgz".format(name_time_frmt)
+    arch_file_name = "web_static_{}.tgz".format(name_time_frmt)
     arch_file_path = "versions/{}".format(arch_file_name)
 
     try:
