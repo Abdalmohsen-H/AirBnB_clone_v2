@@ -65,15 +65,15 @@ def do_deploy(archive_path):
         if not (path.exists(archive_path)):
             return False
 
+        dirpath = "/data/web_static/releases/"
+        # else continue task requirements
+        put(archive_path, '/tmp/')
+
         # flname_wth_ext : filname including(with) extension
         flname_wth_ext = os.path.basename(archive_path)
         # flname_no_extn : filname without extension
         # extn : extension
         flname_no_extn, extn = os.path.splitext(flname_wth_ext)
-
-        dirpath = "/data/web_static/releases/"
-        # else continue task requirements
-        put(archive_path, '/tmp/')
 
         # remove old versions of same archive from prev. script runs
         run("rm -rf {}{}/".format(dpath, flname_no_extn))
@@ -91,4 +91,5 @@ def do_deploy(archive_path):
         return True
 
     except Exception as e:
+        print(e)
         return False
