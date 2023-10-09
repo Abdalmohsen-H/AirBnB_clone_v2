@@ -108,10 +108,11 @@ def do_deploy(archive_path):
         # print(e)
         return False
 
+
 def deploy():
     """
     compine above methods do_pack() & do_deploy()
-    Usage: 
+    Usage:
     fab -f 3-deploy_web_static.py deploy -i ssh_pri_key
     -u remote_username
     """
