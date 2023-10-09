@@ -35,13 +35,16 @@ sudo ln -s -f /data/web_static/releases/test/ /data/web_static/current
 # to be owned by ubuntu/ubuntu user/group
 sudo chown -R ubuntu:ubuntu /data/
 
-# TODO : later improvement make a copy of config from available-sites directory if it is the origin of symbolic link to enabled-sites dir
-# and then only edit the source default config file insisde available-sites to avoid conflicts
+# TODO : later improvement create a  backup of config from available-sites directory if it is the origin of symbolic link to enabled-sites dir
 
 # /server_name/ find first match for this pattern then print it to file and print (append) my addition to config 
-if ! grep -q 'location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-enabled/default; then
-    awk '/server_name/ && !flag {print; print "\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n}"; flag=1; next} 1' /etc/nginx/sites-enabled/default | sudo tee /etc/nginx/sites-enabled/default >/dev/null
+if ! grep -q 'location /hbnb_static { alias /data/web_static/current/;}' /etc/nginx/sites-available/default; then
+    awk '/server_name/ && !flag {print; print "\tlocation /hbnb_static {\n\t\talias /data/web_static/current/;\n\t}"; flag=1; next} 1' /etc/nginx/sites-available/default | sudo tee /etc/nginx/sites-available/default >/dev/null
 fi
+
+
+# make sure that config files updates are linked without conflict
+sudo ln -s -f /etc/nginx/sites-available/default /etc/nginx/sites-enabled
 
 # restart nginx to apply new changes in config
 sudo service nginx restart
