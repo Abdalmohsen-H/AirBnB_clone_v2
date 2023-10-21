@@ -25,12 +25,14 @@ def hello_w():
     '''
     return ("Hello HBNB!")
 
+
 @app.route("/hbnb")
 def hbnb_route():
     ''' return string “Hello HBNB!”
     on get request on "/" route
     '''
     return ("HBNB")
+
 
 if __name__ == "__main__":
     # before below lines
