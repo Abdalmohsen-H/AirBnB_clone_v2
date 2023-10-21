@@ -26,7 +26,7 @@ def hello_w():
     return ("Hello HBNB!")
 
 @app.route("/hbnb")
-def hello_w():
+def hbnb_route():
     ''' return string “Hello HBNB!”
     on get request on "/" route
     '''
