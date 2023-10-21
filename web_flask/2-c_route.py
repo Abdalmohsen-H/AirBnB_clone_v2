@@ -4,6 +4,7 @@ Flask app demo for basic routes
 one of them accept text arg on url
 """
 from flask import Flask
+from markupsafe import escape
 
 # make an instance on Flask class and assign
 # it to app variable
@@ -26,19 +27,20 @@ def hello_w():
 
 @app.route("/hbnb")
 def hbnb_route():
-    ''' return string “Hello HBNB!”
-    on get request on "/" route
+    ''' return string “HBNB”
+    on get request on "/hbnb" route
     '''
     return ("HBNB")
 
 
 @app.route("/c/<text>")
-def take_string_route(text):  # must pass text as arg
-    ''' return string “Hello HBNB!”
-    on get request on "/" route
+def c_string_route(text):  # must pass text as arg
+    ''' return string “c {passed text}”
+    on get request on "/c/<text>" route
+    which accpts text values
     '''
     newtext = text.replace("_", " ")
-    return (f"C {newtext}")
+    return (f"C {escape(newtext)}")
 
 
 if __name__ == "__main__":
