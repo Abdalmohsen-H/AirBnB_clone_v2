@@ -1,0 +1,15 @@
+from typing_extensions import OrderedDict
+from IPython.core import events
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>{{ title }}</TITLE>
+    </HEAD>
+    <BODY>
+        {% if num % 2 == 0 %}
+        <H1>Number: {{ num }} is even</H1>
+        {% else %}
+        <H1>Number: {{ num }} is odd</H1>
+        {% endif %}
+    </BODY>
+</HTML>
