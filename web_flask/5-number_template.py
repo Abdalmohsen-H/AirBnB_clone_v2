@@ -1,4 +1,3 @@
-from flask.templating import render_template
 #!/usr/bin/python3
 """
 Flask app demo for basic routes
@@ -76,7 +75,7 @@ def int_to_jinja(n):  # must pass n as arg
     on get request on this route
     which accpts integer values
     '''
-    return render_template('5-number.html', num=n)
+    return render_template('5-number.html', num=n, title="HBNB")
 
 
 if __name__ == "__main__":
