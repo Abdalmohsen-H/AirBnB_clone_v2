@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
 Flask app demo for basic routes
-one of them accept text arg on url
+and specify dynamic routes that 
+accepts text or integers on url
 """
 from flask import Flask
 from markupsafe import escape
@@ -53,6 +54,15 @@ def py_string_route(text="is cool"):  # must pass text as arg
     '''
     newtext = escape(text).replace("_", " ")
     return (f"Python {newtext}")
+
+
+@app.route("/number/<int:n>")
+def int_dynmic_route(n):  # must pass n as arg
+    ''' return string “{n} is a number”
+    on get request on this route
+    which accpts integer values
+    '''
+    return (f"{n} is a number")
 
 
 if __name__ == "__main__":
