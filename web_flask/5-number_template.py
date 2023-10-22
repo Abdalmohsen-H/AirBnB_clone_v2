@@ -76,7 +76,7 @@ def int_to_jinja(n):  # must pass n as arg
     on get request on this route
     which accpts integer values
     '''
-    return render_template('5-number.html', num=n, title="HBNB")
+    return render_template('5-number.html', num=n)
 
 
 if __name__ == "__main__":
