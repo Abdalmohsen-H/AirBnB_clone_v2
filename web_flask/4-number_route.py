@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Flask app demo for basic routes
-and specify dynamic routes that 
+and specify dynamic routes that
 accepts text or integers on url
 """
 from flask import Flask
