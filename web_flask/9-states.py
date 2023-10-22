@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
 Flask app demo for basic routes
-task 8: return list of states, based on task 6 code
+task 10: return list of states, based on task 6 code
 Also how to use jinja2 templates
 and pass variables to template from functions
 and specify dynamic routes that
@@ -92,6 +92,7 @@ def jinja_if_conditions(n):  # must pass n as arg
         '6-number_odd_or_even.html', num=n, title="HBNB")
 
 
+@app.route('/states')
 @app.route('/states_list')
 def states_list():
     """
@@ -138,11 +139,16 @@ def get_state_by_id(id):
     jinja2, while using sort on jinja2
     """
     states = storage.all(State)
-    if ((id is None) or (id not in states)
-        or (len(states) == 0)):
+    if (id is None):
         state = None
     else:
-        state = states.id
+        key = "State." + id
+        try:
+            state = storage.all()[key]
+        except Exception as e:
+            # id not found in state
+            state = None
+
     return render_template(
             '9-states.html', state=state, title="HBNB")
 
