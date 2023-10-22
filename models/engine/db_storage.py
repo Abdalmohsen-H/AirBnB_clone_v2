@@ -105,6 +105,8 @@ class DBStorage:
 
     def close(self):
         """
-        Close the current session
+        Close the current database session
+        edited on flask project
         """
-        DBStorage.__session.remove()
+        # DBStorage.__session.remove()
+        self.__session.close()

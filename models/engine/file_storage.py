@@ -67,3 +67,9 @@ class FileStorage:
             key = "{}.{}".format(obj.__class__.__name__, str(obj.id))
             del self.__objects[key]
             self.save()
+
+    def close(self):
+        ''' Added while working on Flask project
+        this method that call reload method
+        to deserialize the JSON file to objects'''
+        self.reload()
