@@ -98,10 +98,14 @@ class DBStorage:
         and scoped_session - to make sure your Session is thread-safe
         """
         Base.metadata.create_all(self.__engine)
+        # create an instance of sqlalchemy sessionmaker class
+        # and configure it for engine
         session_factory = sessionmaker(
             bind=self.__engine, expire_on_commit=False
         )
-        self.__session = scoped_session(session_factory)()
+        # Create a session instance from configured session_maker
+        session = scoped_session(session_factory)
+        self.__session = session()
 
     def close(self):
         """
