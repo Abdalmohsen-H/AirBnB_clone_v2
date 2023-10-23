@@ -35,9 +35,6 @@ class DBStorage:
         if env == 'test':
             Base.metadata.drop_all(self.__engine)
 
-        if env != 'test':
-            self.reload()
-
     def all(self, cls=None):
         """
         Query on the current database session (self.__session) all
